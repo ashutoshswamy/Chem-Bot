@@ -40,8 +40,3 @@ Instructions for testing my Chem Bot which has been submitted for the Silicon Va
 | \!ping                           | Shows the bot latency, api latency and bot uptime            |
 | \!invite                         | Gives you a link to invite Chem Bot to your server           |
 
-## » Want to contribute
-
-Contribute on Patreon
-
-Go Here - https://patreon.com/ashutoshswamy
