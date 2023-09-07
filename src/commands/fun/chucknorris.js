@@ -1,15 +1,18 @@
 const discord = require("discord.js");
-const jokes = require("discord-jokes");
+const djokes = require("discord-jokes");
+
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
 
 module.exports.run = async (client, message, args) => {
-  jokes.getRandomCNJoke(function (chucknorris) {
+  djokes.getRandomCNJoke(function (joke) {
     const chucknorrisEmbed = new discord.MessageEmbed()
       .setColor("BLURPLE")
-      .setTitle("A new Chuck Norris Joke is here")
-      .setDescription(`\`${chucknorris}\``)
-      .setFooter({
-        text: "How's the joke ?",
-      })
+      .setTitle(`Chuck Norris Joke for ${message.author.username}`)
+      .setDescription(`**${joke}**`)
       .setTimestamp();
 
     message.reply({
@@ -20,5 +23,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.config = {
   name: "chucknorris",
-  aliases: ["chucknorrisjoke", "cnjoke"],
+  aliases: ["cnjoke", "chucknorrisjoke"],
 };

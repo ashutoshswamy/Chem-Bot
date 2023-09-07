@@ -1,25 +1,30 @@
 const discord = require("discord.js");
 const ultrax = require("ultrax");
 
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
+
 module.exports.run = async (client, message, args) => {
-  const query = args.join(" ");
+  const elementName = args[0];
 
-  if (!query) {
-    const errEmbed = new discord.MessageEmbed()
-      .setColor("RED")
-      .setDescription("Please enter the element name.");
-
+  if (!elementName) {
     message.reply({
-      embeds: [errEmbed],
+      content:
+        "<:cross_mark:932144253709189170> | Please enter the element name.",
     });
   } else {
-    const content = new ultrax.Wikipedia({
-      message: message,
-      color: "BLURPLE",
+    let query = elementName;
+
+    const reponse = new ultrax.Wikipedia({
       query: query,
+      color: "BLURPLE",
+      message: message,
     });
 
-    content.fetch();
+    reponse.fetch();
   }
 };
 

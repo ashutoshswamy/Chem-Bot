@@ -1,11 +1,17 @@
 const config = require("../../config.json");
+const discord = require("discord.js");
+
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ */
 
 module.exports = async (client, message) => {
   if (message.author.bot) return;
   const messageArray = message.content.split(" ");
   const cmd = messageArray[0];
   const args = messageArray.slice(1);
-  if (message.author.bot || message.channel.type === "dm") return;
+  if (message.author.bot || message.channel.type === "DM") return;
   const prefix = config.prefix;
   if (!message.content.startsWith(prefix)) return;
   const commandfile =

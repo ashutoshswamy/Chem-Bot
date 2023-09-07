@@ -1,29 +1,27 @@
 const discord = require("discord.js");
+const ms = require("ms");
+
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
 
 module.exports.run = async (client, message, args) => {
   const pingEmbed = new discord.MessageEmbed()
     .setColor("BLURPLE")
-    .setDescription("Calculating Ping...");
+    .setDescription(
+      `<:Arrow:964215679387566151> Websocket - **${
+        client.ws.ping
+      }ms**\n<:Arrow:964215679387566151> Uptime - **${ms(client.uptime)}**`
+    );
 
-  message
-    .reply({
-      embeds: [pingEmbed],
-    })
-    .then((replyMessage) => {
-      const ping = replyMessage.createdTimestamp - message.createdTimestamp;
-      const pingEmbed2 = new discord.MessageEmbed()
-        .setColor("BLURPLE")
-        .setDescription(
-          `:robot: Bot Latency: **${ping} ms**\n\n:inbox_tray: API Latency: **${client.ws.ping} ms**\n\n:alarm_clock: Uptime: **${client.uptime} ms**`
-        );
-
-      replyMessage.edit({
-        embeds: [pingEmbed2],
-      });
-    });
+  message.reply({
+    embeds: [pingEmbed],
+  });
 };
 
 module.exports.config = {
   name: "ping",
-  aliases: ["latency", "uptime"],
+  aliases: ["uptime"],
 };

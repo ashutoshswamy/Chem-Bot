@@ -1,12 +1,15 @@
 const discord = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
-  const botAV = "https://i.ibb.co/mcfpNkV/Logo-Design-1.jpg";
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
 
+module.exports.run = async (client, message, args) => {
   const atomEmbed = new discord.MessageEmbed()
     .setColor("BLURPLE")
-    .setThumbnail(botAV)
-    .setTitle("Atom(s)")
+    .setTitle("Atom")
     .setDescription(
       "Atom, smallest unit into which matter can be divided without the release of electrically charged particles. It also is the smallest unit of matter that has the characteristic properties of a chemical element. As such, the atom is the basic building block of chemistry."
     )
@@ -15,20 +18,21 @@ module.exports.run = async (client, message, args) => {
     })
     .setTimestamp();
 
-  const atomButton = new discord.MessageButton()
-    .setLabel("More Info")
-    .setStyle("LINK")
-    .setURL("https://www.britannica.com/science/atom");
-
-  const atomRow = new discord.MessageActionRow().addComponents(atomButton);
+  const row = new discord.MessageActionRow().addComponents(
+    new discord.MessageButton()
+      .setLabel("More Info")
+      .setEmoji("ℹ️")
+      .setStyle("LINK")
+      .setURL("https://www.britannica.com/science/atom")
+  );
 
   message.reply({
     embeds: [atomEmbed],
-    components: [atomRow],
+    components: [row],
   });
 };
 
 module.exports.config = {
   name: "atom",
-  aliases: ["atoms", "atominfo"],
+  aliases: [],
 };

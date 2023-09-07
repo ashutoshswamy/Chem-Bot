@@ -1,61 +1,56 @@
 const discord = require("discord.js");
 
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
+
 module.exports.run = async (client, message, args) => {
   const permission = message.member.permissions.has("BAN_MEMBERS");
-  const target = message.mentions.users.first();
-  const days = args[1];
-  const reason =
-    args.slice(2).join(" ") || `No reason provided by ${message.author.tag}`;
+  const user = message.mentions.members.first();
+  const banDuration = args[1];
+  const reason = args.slice(2).join(" ") || "No reason provided";
 
   if (!permission) {
-    const errEmbed = new discord.MessageEmbed()
-      .setColor("RED")
-      .setDescription("You don't have the permissions to use this command.");
-
     message.reply({
-      embeds: [errEmbed],
+      content:
+        "<:cross_mark:932144253709189170> | You don't have the permissions to use this command.",
     });
-  } else if (!target) {
-    const errEmbed2 = new discord.MessageEmbed()
-      .setColor("RED")
-      .setDescription("This user doesn't exist in this server.");
-
+  } else if (!user) {
     message.reply({
-      embeds: [errEmbed2],
+      content:
+        "<:cross_mark:932144253709189170> | Please mention a user to ban.",
     });
-  } else if (!days) {
-    const errEmbed3 = new discord.MessageEmbed()
-      .setColor("RED")
-      .setDescription(
-        "Please specify the amount of days you want to ban that user."
-      );
-
+  } else if (!banDuration) {
     message.reply({
-      embeds: [errEmbed3],
+      content:
+        "<:cross_mark:932144253709189170> | Please enter the ban duration. Ban duration should be in days.",
+    });
+  } else if (!user.bannable) {
+    message.reply({
+      content: "<:cross_mark:932144253709189170> | You can't ban this user.",
     });
   } else {
-    target
+    user
       .ban({
+        days: banDuration,
         reason: reason,
-        days: days,
       })
       .then(() => {
         const softbanEmbed = new discord.MessageEmbed()
           .setColor("BLURPLE")
-          .setTitle("Soft Banned a user")
+          .setTitle("Banned a user")
           .setDescription(
-            `User who banned: <@${message.author.id}>\nUser who got banned: <@${user.id}>\nBan for: **${days} day(s)\n**Reason for ban: **${reason}**`
+            `<:Arrow:964215679387566151> User banned - ${user}\n<:Arrow:964215679387566151> Ban duration - **${banDuration} day(s)**\n<:Arrow:964215679387566151> Reason for ban - **${reason}**`
           )
+          .setFooter({
+            text: `Banned by ${message.author.tag}`,
+          })
           .setTimestamp();
 
         message.reply({
           embeds: [softbanEmbed],
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        message.reply({
-          content: "An error occurred while running this command.",
         });
       });
   }

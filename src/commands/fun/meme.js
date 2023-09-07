@@ -1,40 +1,36 @@
 const discord = require("discord.js");
 const axios = require("axios");
 
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
+
 module.exports.run = async (client, message, args) => {
   const url = "https://meme-api.herokuapp.com/gimme";
 
-  axios
-    .get(url)
-    .then((res) => {
-      const memeEmbed = new discord.MessageEmbed()
-        .setColor("BLURPLE")
-        .setTitle(res.data.title)
-        .setURL(res.data.postLink)
-        .setImage(res.data.url)
-        .setFooter({
-          text: `Post by ${res.data.author} | Likes: 👍 ${res.data.ups}`,
-        })
-        .setTimestamp();
+  axios.default.get(url).then((res) => {
+    const memeEmbed = new discord.MessageEmbed()
+      .setColor("BLURPLE")
+      .setTitle(res.data.title)
+      .addField("Author", `${res.data.author}`, true)
+      .addField("Likes", `${res.data.ups} :thumbsup:`, true)
+      .setImage(res.data.url)
+      .setTimestamp();
 
-      const memeButton = new discord.MessageButton()
+    const row = new discord.MessageActionRow().addComponents(
+      new discord.MessageButton()
         .setLabel("Post Link")
         .setStyle("LINK")
-        .setURL(res.data.postLink);
+        .setURL(res.data.postLink)
+    );
 
-      const memeRow = new discord.MessageActionRow().addComponents(memeButton);
-
-      message.reply({
-        embeds: [memeEmbed],
-        components: [memeRow],
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      message.reply({
-        content: "Meme not available at the moment.",
-      });
+    message.reply({
+      embeds: [memeEmbed],
+      components: [row],
     });
+  });
 };
 
 module.exports.config = {

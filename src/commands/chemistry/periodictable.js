@@ -1,10 +1,16 @@
 const discord = require("discord.js");
 
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
+
 module.exports.run = async (client, message, args) => {
   const periodictableEmbed = new discord.MessageEmbed()
     .setColor("BLURPLE")
-    .setTitle("Click on the Image to make it Big")
-    .setImage("https://i.ibb.co/n1bxd8t/Periodic-Table.jpg")
+    .setTitle("Periodic Table")
+    .setImage("https://i.imgur.com/jtj8GFg.png")
     .setTimestamp();
 
   message.reply({

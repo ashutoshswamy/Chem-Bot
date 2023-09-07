@@ -1,23 +1,29 @@
 const discord = require("discord.js");
 
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
+
 module.exports.run = async (client, message, args) => {
-  const botAV = "https://i.ibb.co/mcfpNkV/Logo-Design-1.jpg";
   const topic = args[0];
 
   const helpEmbed = new discord.MessageEmbed()
     .setColor("BLURPLE")
-    .setThumbnail(botAV)
-    .setTitle("Chem Bot Help Interface")
-    .setDescription(
-      "These are all the commands of Chem Bot. To get info on each command type `!website`"
+    .setThumbnail(
+      client.user.displayAvatarURL({
+        dynamic: true,
+      })
     )
-    .addField("Chemistry :test_tube:", "`!help chemistry`", true)
-    .addField("Fun :rofl:", "`!help fun`", true)
-    .addField("Games :game_die:", "`!help fun`", true)
-    .addField("Math :bookmark_tabs:", "`!help math`", true)
-    .addField("Moderation :closed_lock_with_key:", "`!help moderation`", true)
-    .addField("Misc :tools:", "`!help misc`", true)
-    .addField("Utility :gear:", "`!help utility`", true)
+    .setTitle("Help Interface for Chem Bot")
+    .setDescription(
+      "These are all the help modules available for Chem Bot. If you want detailed info about any command type **!help [command-name]**"
+    )
+    .addField("Chemistry", "`!help chemistry`", true)
+    .addField("Moderation", "`!help moderation`", true)
+    .addField("Fun", "`!help fun`", true)
+    .addField("Utility", "`!help utility`", true)
     .setFooter({
       text: "Use ! prefix before every command",
     })
@@ -27,10 +33,21 @@ module.exports.run = async (client, message, args) => {
     .setColor("BLURPLE")
     .setTitle("Chemistry commands")
     .setDescription(
-      "`chemistry`, `atom`, `molecule`, `ion`, `element`, `compound`, `mixture`, `bondinfo`, `elementinfo`, `periodictable`, `playperiodictable`"
+      "`chemistry` - This command gives a brief info about chemistry\n`atom` - This command gives a brief info about an atom\n`molecule` - This command gives a brief info about a molecule\n`ion` - This command gives a brief info about an ion\n`elementinfo` - This command gives a brief info about an particular element\n`bondinfo` - This command gives a brief info about an particular chemical bond\n`periodictable` - This command shows a periodic table"
     )
     .setFooter({
-      text: "I love Chemistry 💖",
+      text: "Use ! prefix before every command",
+    })
+    .setTimestamp();
+
+  const moderationEmbed = new discord.MessageEmbed()
+    .setColor("BLURPLE")
+    .setTitle("Moderation commands")
+    .setDescription(
+      "`kick` - This command is for kicking a user from the server\n`ban` - This command is for permanantly banning a user from the server\n`softban` - This command is for banning a user from the server for a particular number of days\n`mute` - This command is used for muting a user\n`clear` - This command is used for deleting messages in a channel"
+    )
+    .setFooter({
+      text: "Use ! prefix before every command",
     })
     .setTimestamp();
 
@@ -38,59 +55,25 @@ module.exports.run = async (client, message, args) => {
     .setColor("BLURPLE")
     .setTitle("Fun commands")
     .setDescription(
-      "`gif`, `meme`, `dadjoke`, `chucknorris`, `shuffle`, `reverse`"
+      "`meme` - This command shows a meme\n`dadjoke` - This command shows a dadjoke\n`chucknorris` - This command shows a chuck norris joke"
     )
     .setFooter({
-      text: "I love to have Fun 💖",
-    })
-    .setTimestamp();
-
-  const gamesEmbed = new discord.MessageEmbed()
-    .setColor("BLURPLE")
-    .setTitle("Games commands")
-    .setDescription("`snake`, `fasttype`")
-    .setFooter({
-      text: "I love to play Games 💖",
-    })
-    .setTimestamp();
-
-  const mathEmbed = new discord.MessageEmbed()
-    .setColor("BLURPLE")
-    .setTitle("Math commands")
-    .setDescription("`calculator`")
-    .setFooter({
-      text: "I love Maths 💖",
-    })
-    .setTimestamp();
-
-  const moderationEmbed = new discord.MessageEmbed()
-    .setColor("BLURPLE")
-    .setTitle("Moderation commands")
-    .setDescription("`kick`, `ban`, `timeout`, `clear`")
-    .setFooter({
-      text: "I need Discipline in the server 😠",
-    })
-    .setTimestamp();
-
-  const miscEmbed = new discord.MessageEmbed()
-    .setColor("BLURPLE")
-    .setTitle("Misc commands")
-    .setDescription("`suggestions`")
-    .setFooter({
-      text: "Suggest us so we could improve 😀",
+      text: "Use ! prefix before every command",
     })
     .setTimestamp();
 
   const utilityEmbed = new discord.MessageEmbed()
     .setColor("BLURPLE")
     .setTitle("Utility commands")
-    .setDescription("`info`, `ping`, `invite`, `support`, `website`, `help`")
+    .setDescription(
+      "`info` - This command gives a basic info about me\n`ping` - This command shows the uptime and latency of the bot\n`invite` -  This command gives a link to invite me to your Discord server\n`help` - This command shows the help module"
+    )
     .setFooter({
-      text: "Some more helpful commands 😀",
+      text: "Use ! prefix before every command",
     })
     .setTimestamp();
 
-  if (!topic || topic === "modules") {
+  if (!topic || topic.toLowerCase() === "modules") {
     message.reply({
       embeds: [helpEmbed],
     });
@@ -98,44 +81,26 @@ module.exports.run = async (client, message, args) => {
     message.reply({
       embeds: [chemistryEmbed],
     });
-  } else if (topic.toLowerCase() === "fun") {
-    message.reply({
-      embeds: [funEmbed],
-    });
-  } else if (topic.toLowerCase() === "games") {
-    message.reply({
-      embeds: [gamesEmbed],
-    });
-  } else if (topic.toLowerCase() === "math") {
-    message.reply({
-      embeds: [mathEmbed],
-    });
   } else if (topic.toLowerCase() === "moderation") {
     message.reply({
       embeds: [moderationEmbed],
     });
-  } else if (topic.toLowerCase() === "misc") {
+  } else if (topic.toLowerCase() === "fun") {
     message.reply({
-      embeds: [miscEmbed],
+      embeds: [funEmbed],
     });
   } else if (topic.toLowerCase() === "utility") {
     message.reply({
       embeds: [utilityEmbed],
     });
   } else {
-    const errEmbed = new discord.MessageEmbed()
-      .setColor("RED")
-      .setDescription(
-        "This help module doesn't exist.\nModules which exist are - `chemistry, fun, moderation, misc or utility`"
-      );
-
     message.reply({
-      embeds: [errEmbed],
+      content: "Please enter a valid help module name.",
     });
   }
 };
 
 module.exports.config = {
   name: "help",
-  aliases: ["commands", "commandhelp"],
+  aliases: ["commands", "commandshelp"],
 };

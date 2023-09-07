@@ -1,19 +1,25 @@
 const discord = require("discord.js");
-const jokes = require("discord-jokes");
+const djokes = require("discord-jokes");
+
+/**
+ * @param {discord.Client} client
+ * @param {discord.Message} message
+ * @param {String[]} args
+ */
 
 module.exports.run = async (client, message, args) => {
-  jokes.getRandomDadJoke(function (dadjoke) {
-    const dadJokeEmbed = new discord.MessageEmbed()
+  djokes.getRandomDadJoke(function (joke) {
+    const dadjokeEmbed = new discord.MessageEmbed()
       .setColor("BLURPLE")
-      .setTitle("A new Dad Joke is here")
-      .setDescription(`\`${dadjoke}\``)
+      .setTitle(`Dad Joke for ${message.author.username}`)
+      .setDescription(`**${joke}**`)
       .setFooter({
-        text: "How's the joke ?",
+        text: "Joke from a random dad",
       })
       .setTimestamp();
 
     message.reply({
-      embeds: [dadJokeEmbed],
+      embeds: [dadjokeEmbed],
     });
   });
 };

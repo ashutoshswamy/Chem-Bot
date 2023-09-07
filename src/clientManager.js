@@ -1,6 +1,6 @@
 const config = require("../config.json");
-const discord = require("discord.js");
 const EventHandler = require("./utils/loadEvents");
+const discord = require("discord.js");
 
 module.exports = class ClientManager extends discord.Client {
   constructor(options) {
