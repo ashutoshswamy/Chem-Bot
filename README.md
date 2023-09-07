@@ -51,9 +51,3 @@ Instructions for testing my Chem Bot which has been submitted for the Silicon Va
 | \!invite                         | Gives you a link to invite Chem Bot to your server            |
 | \!support                        | Gives you a link to join Chem Bot's Support Server            |
 | \!website                        | Gives you a link to go to Chem Bot's website                  |
-
-## » Want to contribute
-
-Contribute on Patreon
-
-Go Here - https://patreon.com/ashutoshswamy
