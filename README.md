@@ -18,25 +18,24 @@ Instructions for testing my Chem Bot which has been submitted for the Silicon Va
 
 ## » Commands
 
-| Command                          | Description                                                  |
-| -------------------------------- | ------------------------------------------------------------ |
-| \!chemistry                      | Gives you information about chemistry                        |
-| \!atom                           | Gives you information about an atom                          |
-| \!molecule                       | Gives you information about a molecule                       |
-| \!ion                            | Gives you information about an ion                           |
-| \!bondinfo [bond name]           | Gives you information about a specific type of chemical bond |
-| \!elementinfo [element name]     | Gives you information about a specific chemical element      |
-| \!periodictable                  | Gives you the whole periodic table                           |
-| \!playperiodictable              | Gives you a song on whole periodic table                     |
-| \!meme                           | Gives you a random meme from reddit.com                      |
-| \!dadjoke                        | Gives you a random dadjoke                                   |
-| \!chucknorris                    | Gives you a random joke on Chuck Norris                      |
-| \!kick [user] [reason]           | Kicks a user out of the server                               |
-| \!ban [user] [reason]            | Bans a user from the server                                  |
-| \!softban [user] [days] [reason] | Soft Bans a user from the server                             |
-| \!mute [user] [time] [reason]    | Mutes a user for a particular time                           |
-| \!clear [amount of messages]     | Clears the particular amount of messages in that channel     |
-| \!info                           | Gives you a basic information about the bot                  |
-| \!ping                           | Shows the bot latency, api latency and bot uptime            |
-| \!invite                         | Gives you a link to invite Chem Bot to your server           |
-
+| Command                            | Description                                                  |
+| ---------------------------------- | ------------------------------------------------------------ |
+| /chemistry                         | Gives you information about chemistry                        |
+| /atom                              | Gives you information about an atom                          |
+| /molecule                          | Gives you information about a molecule                       |
+| /ion                               | Gives you information about an ion                           |
+| /elementinfo [element name]        | Gives you information about a specific chemical element      |
+| /bondinfo [bond name]              | Gives you information about a specific type of chemical bond |
+| /periodictable                     | Gives you the whole periodic table                           |
+| /meme                              | Gives you a random meme from reddit.com                      |
+| /gif [search query]                | Gives you a gif from tenor.com                               |
+| /dadjoke                           | Gives you a random dadjoke                                   |
+| /chucknorris                       | Gives you a random joke on Chuck Norris                      |
+| /kick [user] [reason]              | Kicks a user out of the server                               |
+| /ban [user] [reason]               | Bans a user from the server                                  |
+| /timeout [user] [timeout] [reason] | Timeouts a user for a particular time                        |
+| /clear [amount of messages]        | Clears the particular amount of messages in that channel     |
+| /info                              | Gives you a basic information about the bot                  |
+| /invite                            | Gives you a link to invite Chem Bot to your server           |
+| /support                           | Gives you a link to join Chem Bot's support server           |
+| /ping                              | Shows the bot latency and uptime                             |
